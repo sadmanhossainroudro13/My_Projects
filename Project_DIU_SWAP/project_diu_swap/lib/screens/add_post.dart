@@ -1,9 +1,14 @@
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:project_diu_swap/services/cloudinary_service.dart';
 import 'package:project_diu_swap/widgets/bold_text.dart';
+import 'package:project_diu_swap/widgets/customButton.dart';
 import 'package:project_diu_swap/widgets/custom_drop_down.dart';
 import 'package:project_diu_swap/widgets/custom_textfield.dart';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_diu_swap/widgets/upload_photo_widget.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -13,10 +18,12 @@ class AddPost extends StatefulWidget {
 }
 
 class _AddPostState extends State<AddPost> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  bool isLoading = false;
+  final _titleController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _locationController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   String? selectedCategory;
 
@@ -27,9 +34,70 @@ class _AddPostState extends State<AddPost> {
   // Pick Image Function
   Future<void> pickImages() async {
     final selectedImage = await picker.pickMultiImage();
-    if (selectedImage != null && selectedImage.isNotEmpty) {
+    if (selectedImage.isNotEmpty) {
       setState(() {
         images.addAll(selectedImage);
+      });
+    }
+  }
+
+  //Submit Post Function
+
+  Future<void> submitPost() async {
+    String title = _titleController.text;
+    int? price = int.tryParse(_priceController.text);
+    String location = _locationController.text;
+    String description = _descriptionController.text;
+    int? phoneNumber = int.tryParse(_phoneNumberController.text);
+
+    if (title.isEmpty ||
+        location.isEmpty ||
+        images.isEmpty ||
+        selectedCategory == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Pleas fill all required fields")));
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      //Object of Cloudinary service
+      CloudinaryService service = CloudinaryService();
+      //store image urls
+      List<String> imageUrls = [];
+
+      for (var img in images) {
+        String url = await service.uploadImage(File(img.path));
+        imageUrls.add(url);
+      }
+
+      await FirebaseFirestore.instance.collection("posts").add({
+        "title": title,
+        "price": price,
+        "category": selectedCategory,
+        "location": location,
+        "description": description,
+        "phoneNumber": phoneNumber,
+        "images": imageUrls,
+        "createdAt": Timestamp.now(),
+      });
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Post Uploaded Successfully")));
+    } catch (e) {
+      print("Error: $e");
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Something went wrong")));
+    } finally {
+      setState(() {
+        isLoading = false;
       });
     }
   }
@@ -57,7 +125,16 @@ class _AddPostState extends State<AddPost> {
 
               SizedBox(height: 10),
 
-              SizedBox(height: 110,),
+              //image
+              UploadPhotoWidget(
+                images: images,
+                onAdd: pickImages,
+                onRemove: (index) {
+                  setState(() {
+                    images.removeAt(index);
+                  });
+                },
+              ),
 
               BoldText(str: "Title"),
 
@@ -66,10 +143,16 @@ class _AddPostState extends State<AddPost> {
                 hint: "Enter item title",
               ),
 
+              //Price
               BoldText(str: "Price"),
 
-              CustomTexField(controller: _priceController, hint: "Enter price"),
-
+              CustomTexField(
+                controller: _priceController,
+                hint: "Enter price",
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+              //Category
               BoldText(str: "Category"),
 
               CustomDropdown(
@@ -81,6 +164,7 @@ class _AddPostState extends State<AddPost> {
                 },
               ),
 
+              //Location
               BoldText(str: "Location"),
 
               CustomTexField(
@@ -88,14 +172,34 @@ class _AddPostState extends State<AddPost> {
                 hint: "YKSG hall-1, Daffodil International University",
                 maxLines: 1,
               ),
-
+              //Description
               BoldText(str: "Description"),
 
               CustomTexField(
                 controller: _descriptionController,
                 hint: "Describe your item...",
-                maxLines: 3,
+                maxLines: 2,
               ),
+
+              BoldText(str: "Phone Number"),
+
+              CustomTexField(
+                controller: _phoneNumberController,
+                keyboardType: TextInputType.number,
+                hint: "Enter contact number",
+              ),
+
+              SizedBox(height: 5),
+
+              //PostAdd
+              isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : Custombutton(
+                      buttonText: "Post Ad",
+                      buttonFunction: submitPost,
+                      bgColor: Colors.green,
+                      textColor: Colors.white,
+                    ),
             ],
           ),
         ),
