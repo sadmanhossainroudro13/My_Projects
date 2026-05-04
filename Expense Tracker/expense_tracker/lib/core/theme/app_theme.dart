@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Background
-  static const Color bgDark = Color(0xFF0F2A2A);
+  static const Color bgDark = Color.fromARGB(255, 32, 37, 37);
   static const Color bgLight = Color(0xFF1F3D3D);
 
   // Primary (gold)
@@ -14,6 +14,7 @@ class AppColors {
 
   // Text
   static const Color secondaryText = Color(0xFFBFC3A4);
+  static const Color textColor = Color(0xFFD2D99A);
 
   // Social button
   static const Color socialBg = Color(0xFFF1F2D9);
@@ -21,6 +22,7 @@ class AppColors {
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+    fontFamily: 'Playwrite',
     scaffoldBackgroundColor: AppColors.bgDark,
 
     colorScheme: ColorScheme.fromSeed(

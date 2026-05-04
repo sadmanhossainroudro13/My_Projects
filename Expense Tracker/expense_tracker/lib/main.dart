@@ -1,5 +1,6 @@
+import 'package:expense_tracker/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'theme/app_theme.dart';
+import 'core/theme/app_theme.dart';
 import 'screens/login_screen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }
