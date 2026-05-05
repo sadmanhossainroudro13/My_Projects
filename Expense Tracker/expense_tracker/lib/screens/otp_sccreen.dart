@@ -1,7 +1,6 @@
-import 'package:expense_tracker/core/image_links.dart';
 import 'package:expense_tracker/core/theme/app_theme.dart';
 import 'package:expense_tracker/screens/login_screen.dart';
-import 'package:expense_tracker/screens/signup_screen.dart';
+import 'package:expense_tracker/widgets/background_screen.dart';
 import 'package:flutter/material.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -33,79 +32,74 @@ class OtpScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.bgDark, AppColors.bgLight],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: SafeArea(
+      body: BackgroundScreen(
+        customChild: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 140),
-
-                Text(
-                  "Verify Your Account",
-                  style: TextStyle(
-                    color: AppColors.secondaryText,
-                    fontSize: 40,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 140),
+                  Text(
+                    "Verify Your Account",
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 38,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
 
-                const SizedBox(height: 12),
+                  const SizedBox(height: 12),
 
-                const Text(
-                  "Check your email for a 6-digit\nverification code sent to\nuser_email@example.com.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.secondaryText),
-                ),
+                  const Text(
+                    "Check your email for a 6-digit\nverification code sent to\nuser_email@example.com.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.secondaryText),
+                  ),
 
-                const SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
-                /// OTP Boxes
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(6, (index) => otpBox()),
-                ),
+                  /// OTP Boxes
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(6, (index) => otpBox()),
+                  ),
 
-                const SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
-                /// Verify Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    },
-                    child: Text(
-                      "Verify",
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.bgDark,
+                  /// Verify Button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Verify",
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.bgDark,
+                        ),
                       ),
                     ),
                   ),
-                ),
 
-                const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                const Text(
-                  "Resend code in 0:45",
-                  style: TextStyle(color: AppColors.secondaryText),
-                ),
-              ],
+                  const Text(
+                    "Resend code in 0:45",
+                    style: TextStyle(color: AppColors.secondaryText),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
