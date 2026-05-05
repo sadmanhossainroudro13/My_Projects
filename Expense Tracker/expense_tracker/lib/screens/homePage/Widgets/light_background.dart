@@ -8,12 +8,11 @@ class LightBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-
       decoration: const BoxDecoration(
-        color: AppColors.inputBg, 
+        color: AppColors.inputBg,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
       ),
     );

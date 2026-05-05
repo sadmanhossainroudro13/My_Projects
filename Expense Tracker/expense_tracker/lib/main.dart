@@ -1,7 +1,7 @@
 import 'package:expense_tracker/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
-import 'screens/login_screen.dart';
+import 'screens/before_login_screen/login_screen.dart';
 
 void main() {
   runApp(const MyApp());

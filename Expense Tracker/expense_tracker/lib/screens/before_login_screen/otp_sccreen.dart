@@ -1,5 +1,5 @@
 import 'package:expense_tracker/core/theme/app_theme.dart';
-import 'package:expense_tracker/screens/login_screen.dart';
+import 'package:expense_tracker/screens/before_login_screen/login_screen.dart';
 import 'package:expense_tracker/widgets/background_screen.dart';
 import 'package:flutter/material.dart';
 

@@ -1,11 +1,14 @@
+import 'package:expense_tracker/core/links/image_links.dart';
 import 'package:expense_tracker/core/theme/app_theme.dart';
-import 'package:expense_tracker/screens/login_screen.dart';
-import 'package:expense_tracker/screens/terms_and_conddition.dart';
+import 'package:expense_tracker/screens/before_login_screen/forget_password.dart';
+import 'package:expense_tracker/screens/homePage/home_screen.dart';
+import 'package:expense_tracker/screens/main_screen.dart';
+import 'package:expense_tracker/screens/before_login_screen/signup_screen.dart';
 import 'package:expense_tracker/widgets/background_screen.dart';
 import 'package:flutter/material.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +19,16 @@ class SignupScreen extends StatelessWidget {
         customChild: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 60),
+                  Image.asset(ImageLinks.logo, height: 100),
 
                   const SizedBox(height: 16),
 
                   const Text(
-                    "Create Account",
+                    "PennyWise",
                     style: TextStyle(
                       fontSize: 33,
                       fontWeight: FontWeight.bold,
@@ -35,12 +39,11 @@ class SignupScreen extends StatelessWidget {
                   const SizedBox(height: 14),
 
                   const Text(
-                    "Start your AI-powered financial journey today.",
+                    "AI-Powered Financial Journey",
                     style: TextStyle(
                       color: AppColors.secondaryText,
                       fontSize: 20,
                     ),
-                    textAlign: TextAlign.center,
                   ),
 
                   const SizedBox(height: 40),
@@ -48,16 +51,6 @@ class SignupScreen extends StatelessWidget {
                   Form(
                     child: Column(
                       children: [
-                        /// Full name
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: "Full Name",
-                            prefixIcon: Icon(Icons.person, size: 20),
-                          ),
-                        ),
-
-                        const SizedBox(height: 16),
-
                         /// Email
                         TextFormField(
                           decoration: const InputDecoration(
@@ -70,24 +63,9 @@ class SignupScreen extends StatelessWidget {
 
                         /// Password
                         TextFormField(
-                          obscureText: true,
+                          obscureText: true, //replace with custompassword field
                           decoration: const InputDecoration(
                             hintText: "Password",
-                            prefixIcon: Icon(Icons.lock_outlined, size: 20),
-                            suffixIcon: Icon(
-                              Icons.visibility_off,
-                              color: AppColors.bgDark,
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 16),
-
-                        /// Password
-                        TextFormField(
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            hintText: "Confirm Password",
                             prefixIcon: Icon(Icons.lock_outlined, size: 20),
                             suffixIcon: Icon(
                               Icons.visibility_off,
@@ -100,44 +78,24 @@ class SignupScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
 
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Checkbox(
-                        value: false,
-                        activeColor: theme.colorScheme.primary,
-                        onChanged: (value) {},
-                      ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgetPassword(),
+                          ),
+                        );
+                      },
 
-                      Expanded(
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              "I agree to the ",
-                              style: TextStyle(color: AppColors.textColor),
-                            ),
-
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TermsAndConddition(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "Terms & Conditions",
-                                style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      ///Forget Password
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(color: theme.colorScheme.primary),
                       ),
-                    ],
+                    ),
                   ),
 
                   const SizedBox(height: 24),
@@ -146,9 +104,16 @@ class SignupScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainScreen()),
+                        );
+                      },
+
+                      ///Login
                       child: Text(
-                        "Sign up",
+                        "Log In",
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -164,7 +129,7 @@ class SignupScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Already have an account? ",
+                        "Don't have an account? ",
                         style: TextStyle(color: AppColors.secondaryText),
                       ),
                       InkWell(
@@ -172,12 +137,12 @@ class SignupScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
+                              builder: (context) => const SignupScreen(),
                             ),
                           );
                         },
                         child: Text(
-                          "Login",
+                          "Sign Up",
                           style: TextStyle(
                             color: theme.colorScheme.primary,
                             fontWeight: FontWeight.bold,
@@ -186,6 +151,17 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  // const SizedBox(height: 30),
+                  // Container(
+                  //   height: 55,
+                  //   width: 55,
+                  //   decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     color: AppColors.socialBg,
+                  //   ),
+                  //   child: Icon(Icons.g_mobiledata, size: 30),
+                  // ),
                 ],
               ),
             ),

@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return BackgroundScreen(
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         /// 5. TRANSACTIONS
                         const TransactionSection(),
 
-                        const SizedBox(height: 50),
+                        const SizedBox(height: 90),
                       ],
                     ),
                   ),

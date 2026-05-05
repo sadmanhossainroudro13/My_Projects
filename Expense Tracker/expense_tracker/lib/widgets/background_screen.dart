@@ -9,20 +9,17 @@ class BackgroundScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 5
+    return Container(
+      height: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [AppColors.bgDark, AppColors.bgLight],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.bgDark, AppColors.bgLight],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: customChild,
       ),
+      child: customChild,
     );
   }
 }
