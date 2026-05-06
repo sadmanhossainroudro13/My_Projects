@@ -70,14 +70,13 @@ class GoalsSection extends StatelessWidget {
 
           const SizedBox(height: 15),
 
-          /// 🔹 Add Goal Button
+          ///  Add Goal Button
           Container(
             height: 55,
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColors.primary,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.black12),
             ),
             child: const Center(
               child: Text(

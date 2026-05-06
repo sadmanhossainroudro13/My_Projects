@@ -11,9 +11,6 @@ class HeaderSectionBudget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ///Arroew
-          Icon(Icons.arrow_back, color: AppColors.hintText),
-
           Text(
             ///PennyWise Budget
             "PennyWise Budget",

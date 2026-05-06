@@ -1,5 +1,7 @@
+import 'package:expense_tracker/screens/addTransaction/add_transaction_screen.dart';
 import 'package:expense_tracker/screens/budgetPage/budget_screen.dart';
 import 'package:expense_tracker/screens/homePage/home_screen.dart';
+import 'package:expense_tracker/screens/profileScreen/profile_screen.dart';
 import 'package:expense_tracker/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +18,9 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = [
     HomeScreen(),
     BudgetScreen(),
-    Center(child: Text("Add")),
+    AddTransactionScreen(),
     Center(child: Text("AI")),
-    Center(child: Text("Profile")),
+    ProfileScreen(),
   ];
 
   @override
@@ -31,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
 
           ///  FLOATING NAVBAR (overlay)
           Positioned(
-            bottom: 0,
+            bottom: 5,
             left: 6,
             right: 6,
             child: CustomNavbar(
