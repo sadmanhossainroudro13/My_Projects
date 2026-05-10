@@ -1,10 +1,27 @@
-import 'package:expense_tracker/screens/splash_screen.dart';
+import 'package:expense_tracker/features/transaction/providers/category_provider.dart';
+import 'package:expense_tracker/features/transaction/providers/transaction_provider.dart';
+import 'package:expense_tracker/shared/providers/auth_provider.dart';
+import 'package:expense_tracker/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
-import 'screens/before_login_screen/login_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        //  auth provider
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+
+        //  transaction provider
+        ChangeNotifierProvider(create: (_) => TransactionProvider()),
+        
+        //Category Provider
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
