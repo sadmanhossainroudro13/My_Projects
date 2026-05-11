@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class TransactionTile extends StatelessWidget {
@@ -18,7 +19,7 @@ class TransactionTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.socialBg,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
@@ -26,8 +27,8 @@ class TransactionTile extends StatelessWidget {
           /// Icon
           CircleAvatar(
             radius: 18,
-            backgroundColor: Colors.grey.shade200,
-            child: const Icon(Icons.shopping_bag, size: 18),
+            backgroundColor: AppColors.textColor,
+            child: const Icon(Icons.attach_money, size: 18),
           ),
 
           const SizedBox(width: 12),
@@ -39,8 +40,12 @@ class TransactionTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
                 ),
+                SizedBox(height: 5),
                 Text(date, style: const TextStyle(fontSize: 12)),
               ],
             ),

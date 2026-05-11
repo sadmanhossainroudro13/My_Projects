@@ -8,7 +8,6 @@ class TransactionModel {
 
   final DateTime date;
 
-
   final String note;
 
   TransactionModel({

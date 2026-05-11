@@ -30,7 +30,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _item(0, Icons.home, "Home"),
-          _item(1, Icons.pie_chart, "Budget"),
+          _item(1, Icons.pie_chart_sharp, "Chart"),
           _item(2, Icons.add, "Add"),
           _item(3, Icons.auto_awesome, "AI"),
           _item(4, Icons.person, "Profile"),

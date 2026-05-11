@@ -1,10 +1,10 @@
-class BudgetItem {
+class ChartItem {
   final String title;
   final double amount; // spent
-  final double limit;  // total budget
+  final double limit; // total budget
   final int color;
 
-  BudgetItem({
+  ChartItem({
     required this.title,
     required this.amount,
     required this.limit,

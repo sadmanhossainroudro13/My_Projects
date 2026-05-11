@@ -1,5 +1,4 @@
 import 'package:expense_tracker/features/home/widgets/balance_card_section.dart';
-import 'package:expense_tracker/features/home/widgets/goals_section.dart';
 import 'package:expense_tracker/features/home/widgets/header_section.dart';
 import 'package:expense_tracker/features/home/widgets/light_background.dart';
 import 'package:expense_tracker/features/home/widgets/transaction_section.dart';
@@ -14,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return BackgroundScreen(
@@ -28,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 20),
 
-            ///  2. MAIN BODY (STACK PART)
+            ///   MAIN BODY (STACK PART)
             Expanded(
               child: Stack(
                 children: [
@@ -41,13 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         const SizedBox(height: 20),
 
-                        /// 🎯 4. GOALS
-                        const GoalsSection(),
-
-                        const SizedBox(height: 20),
-
-                        /// 5. TRANSACTIONS
-                        const TransactionSection(),
+                        ///  TRANSACTIONS
+                        TransactionSection(),
 
                         const SizedBox(height: 90),
                       ],
