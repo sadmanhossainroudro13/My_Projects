@@ -128,6 +128,7 @@ lib/
 │   ├── theme/
 │
 ├── features/
+    ├── splash/
 │   ├── authentication/
 │   ├── home/
 │   ├── profile/

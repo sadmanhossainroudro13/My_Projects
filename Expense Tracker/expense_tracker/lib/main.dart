@@ -4,7 +4,7 @@ import 'package:expense_tracker/providers/currency_provider.dart';
 import 'package:expense_tracker/providers/notification_provider.dart';
 import 'package:expense_tracker/providers/transaction_provider.dart';
 import 'package:expense_tracker/shared/providers/auth_provider.dart';
-import 'package:expense_tracker/features/splach_screen/splash_screen.dart';
+import 'package:expense_tracker/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
