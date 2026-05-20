@@ -144,32 +144,40 @@ lib/
 
 # Screenshots
 
-## Home Page
-![Home Page](screenshots/home_page.jpeg)
+## Authentication
 
-## Add Transaction
-![Add Transaction](screenshots/add_transaction.jpeg)
+<p align="center">
+  <img src="screenshots/login.jpeg" width="220"/>
+  <img src="screenshots/sign_up.jpeg" width="220"/>
+  <img src="screenshots/forget_password.jpeg" width="220"/>
+</p>
 
-## Chart Page
-![Chart Page](screenshots/chart_page.jpeg)
+<p align="center">
+  <img src="screenshots/verify_Password.jpeg" width="220"/>
+</p>
 
-## Transaction Details
-![Transaction Details](screenshots/transaction_details.jpeg)
+---
 
-## Currency Selection
-![Currency Selection](screenshots/select_currency.jpeg)
+## Home & Transactions
 
-## Login Screen
-![Login Screen](screenshots/login.jpeg)
+<p align="center">
+  <img src="screenshots/home_page.jpeg" width="220"/>
+  <img src="screenshots/add_transaction.jpeg" width="220"/>
+  <img src="screenshots/details.jpeg" width="220"/>
+</p>
 
-## Sign Up Screen
-![Sign Up Screen](screenshots/sign_up.jpeg)
+<p align="center">
+  <img src="screenshots/transaction_details.jpeg" width="220"/>
+</p>
 
-## Forgot Password
-![Forgot Password](screenshots/forget_password.jpeg)
+---
 
-## Verify Password
-![Verify Password](screenshots/verify_Password.jpeg)
+## Analytics & Currency
+
+<p align="center">
+  <img src="screenshots/chart_page.jpeg" width="220"/>
+  <img src="screenshots/select_currency.jpeg" width="220"/>
+</p>
 
 ---
 
