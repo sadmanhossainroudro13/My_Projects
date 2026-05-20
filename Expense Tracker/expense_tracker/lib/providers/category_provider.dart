@@ -111,7 +111,7 @@ class CategoryProvider extends ChangeNotifier {
     CategoryModel(
       title: "Others",
       icon: Icons.category_outlined,
-      color: const Color(0xFFD2D2D2),
+      color: const Color.fromARGB(255, 80, 70, 148),
     ),
   ];
 

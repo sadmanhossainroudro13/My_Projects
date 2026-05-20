@@ -1,6 +1,9 @@
 import 'package:expense_tracker/core/theme/app_theme.dart';
+import 'package:expense_tracker/features/profile/screens/currency_screen.dart';
 import 'package:expense_tracker/features/profile/widgets/setting_tile.dart';
+import 'package:expense_tracker/providers/notification_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsSection extends StatefulWidget {
   const SettingsSection({super.key});
@@ -18,6 +21,7 @@ class _SettingsSectionState extends State<SettingsSection> {
 
   @override
   Widget build(BuildContext context) {
+    final notificationProvider = Provider.of<NotificationProvider>(context);
     return Column(
       children: [
         /// 👤 PERSONAL INFO
@@ -52,14 +56,12 @@ class _SettingsSectionState extends State<SettingsSection> {
           title: "Notifications",
 
           trailing: Switch(
-            value: notificationsEnabled,
+            value: notificationProvider.notificationEnabled,
 
             activeColor: AppColors.primary,
 
             onChanged: (value) {
-              setState(() {
-                notificationsEnabled = value;
-              });
+              notificationProvider.toggleNotification(value);
             },
           ),
         ),
@@ -72,8 +74,11 @@ class _SettingsSectionState extends State<SettingsSection> {
           title: "Currency Converter",
 
           onTap: () {
-            /// future:
-            /// currency page
+            Navigator.push(
+              context,
+
+              MaterialPageRoute(builder: (context) => const CurrencyScreen()),
+            );
           },
         ),
 
@@ -92,24 +97,6 @@ class _SettingsSectionState extends State<SettingsSection> {
         //   },
         // ),
         const SizedBox(height: 18),
-
-        /// 🌙 APP THEME
-        SettingsTile(
-          icon: Icons.dark_mode_outlined,
-          title: "App Theme",
-
-          trailing: Switch(
-            value: darkThemeEnabled,
-
-            activeColor: AppColors.primary,
-
-            onChanged: (value) {
-              setState(() {
-                darkThemeEnabled = value;
-              });
-            },
-          ),
-        ),
       ],
     );
   }

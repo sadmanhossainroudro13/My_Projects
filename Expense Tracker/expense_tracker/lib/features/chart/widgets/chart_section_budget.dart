@@ -1,7 +1,9 @@
 import 'package:expense_tracker/core/theme/app_theme.dart';
 import 'package:expense_tracker/features/chart/widgets/chart_item_class.dart';
+import 'package:expense_tracker/providers/currency_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChartSection extends StatelessWidget {
   /// chart data list
@@ -11,6 +13,8 @@ class ChartSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
+
     /// total expense calculate korbe
     ///
     /// Example:
@@ -84,7 +88,7 @@ class ChartSection extends StatelessWidget {
                   ///
                   /// toStringAsFixed(0)
                   /// decimal remove korbe
-                  "\$${total.toStringAsFixed(0)}",
+                  "${currencyProvider.selectedCurrency.symbol} ${total.toStringAsFixed(0)}",
 
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,

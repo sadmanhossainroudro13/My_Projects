@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/theme/app_theme.dart';
-import 'package:expense_tracker/features/transaction/providers/transaction_provider.dart';
+import 'package:expense_tracker/providers/currency_provider.dart';
+import 'package:expense_tracker/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ class CategoryDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
     final transactionProvider = Provider.of<TransactionProvider>(context);
 
     /// FILTER TRANSACTIONS
@@ -62,7 +64,7 @@ class CategoryDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 10),
 
                   Text(
-                    "\$${totalExpense.toStringAsFixed(0)}",
+                    "${currencyProvider.selectedCurrency.symbol} ${totalExpense.toStringAsFixed(0)}",
 
                     style: const TextStyle(
                       fontSize: 28,
@@ -140,7 +142,7 @@ class CategoryDetailsScreen extends StatelessWidget {
 
                               /// AMOUNT
                               Text(
-                                "\$${transaction.amount}",
+                                "${currencyProvider.selectedCurrency.symbol} ${transaction.amount}",
 
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,

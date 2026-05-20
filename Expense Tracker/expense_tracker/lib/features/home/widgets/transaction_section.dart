@@ -1,5 +1,6 @@
 import 'package:expense_tracker/features/home/widgets/transactionTile.dart';
-import 'package:expense_tracker/features/transaction/providers/transaction_provider.dart';
+import 'package:expense_tracker/providers/currency_provider.dart';
+import 'package:expense_tracker/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,8 @@ class _TransactionSectionState extends State<TransactionSection> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     final transactionProvider = Provider.of<TransactionProvider>(context);
 
@@ -93,8 +96,12 @@ class _TransactionSectionState extends State<TransactionSection> {
                     "${transaction.date.day}/${transaction.date.month}/${transaction.date.year}",
 
                 amount: transaction.isExpense
-                    ? "-\$${transaction.amount}"
-                    : "+\$${transaction.amount}",
+                    ? "- ${currencyProvider.selectedCurrency.symbol}${transaction.amount}"
+                    : "+ ${currencyProvider.selectedCurrency.symbol}${transaction.amount}",
+
+                onDelete: () {
+                  transactionProvider.deleteTransaction(transaction);
+                },
               ),
             );
           }),

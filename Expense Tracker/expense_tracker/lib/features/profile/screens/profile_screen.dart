@@ -52,18 +52,6 @@ class ProfileScreen extends StatelessWidget {
 
                       const SizedBox(height: 30),
 
-                      // /// 📂 5. DATA CONTROL TITLE
-                      // const Text(
-                      //   "Data Control Section",
-
-                      //   style: TextStyle(
-                      //     fontSize: 18,
-                      //     fontWeight: FontWeight.w600,
-                      //     color: Colors.black87,
-                      //   ),
-                      // ),
-                      const SizedBox(height: 20),
-
                       /// 🚪 6. LOGOUT BUTTON
                       LogoutButton(),
 

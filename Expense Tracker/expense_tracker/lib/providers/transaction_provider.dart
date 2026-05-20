@@ -1,4 +1,5 @@
 import 'package:expense_tracker/features/transaction/models/transaction_model.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class TransactionProvider extends ChangeNotifier {
@@ -7,6 +8,13 @@ class TransactionProvider extends ChangeNotifier {
   /// ADD TRANSACTION
   void addTransaction(TransactionModel transaction) {
     transactions.add(transaction);
+
+    notifyListeners();
+  }
+
+  /// DELETE TRANSACTION
+  void deleteTransaction(TransactionModel transaction) {
+    transactions.remove(transaction);
 
     notifyListeners();
   }
@@ -27,6 +35,100 @@ class TransactionProvider extends ChangeNotifier {
     }
 
     return total;
+  }
+
+  /// CURRENT MONTH INCOME
+  double get currentMonthIncome {
+    double total = 0;
+
+    final now = DateTime.now();
+
+    for (var transaction in transactions) {
+      if (!transaction.isExpense &&
+          transaction.date.year == now.year &&
+          transaction.date.month == now.month) {
+        total += transaction.amount;
+      }
+    }
+
+    return total;
+  }
+
+  /// CURRENT MONTH EXPENSE
+  double get currentMonthExpense {
+    double total = 0;
+
+    final now = DateTime.now();
+
+    for (var transaction in transactions) {
+      if (transaction.isExpense &&
+          transaction.date.year == now.year &&
+          transaction.date.month == now.month) {
+        total += transaction.amount;
+      }
+    }
+
+    return total;
+  }
+
+  /// MONTHLY GRAPH SPOTS
+  List<FlSpot> getMonthlySpots({required bool isIncome}) {
+    final now = DateTime.now();
+
+    final daysInMonth = DateUtils.getDaysInMonth(now.year, now.month);
+
+    List<FlSpot> spots = [];
+
+    /// LOOP THROUGH EVERY DAY
+    for (int day = 1; day <= daysInMonth; day++) {
+      double total = 0;
+
+      /// CHECK ALL TRANSACTIONS
+      for (var transaction in transactions) {
+        /// INCOME GRAPH
+        if (isIncome &&
+            !transaction.isExpense &&
+            transaction.date.year == now.year &&
+            transaction.date.month == now.month &&
+            transaction.date.day == day) {
+          total += transaction.amount;
+        }
+
+        /// EXPENSE GRAPH
+        if (!isIncome &&
+            transaction.isExpense &&
+            transaction.date.year == now.year &&
+            transaction.date.month == now.month &&
+            transaction.date.day == day) {
+          total += transaction.amount;
+        }
+      }
+
+      /// ADD GRAPH POINT
+      spots.add(FlSpot(day.toDouble(), total));
+    }
+
+    return spots;
+  }
+
+  /// DAILY LIMIT
+  double get dailyLimit {
+    final daysInMonth = DateUtils.getDaysInMonth(
+      DateTime.now().year,
+      DateTime.now().month,
+    );
+
+    return currentMonthIncome / daysInMonth;
+  }
+
+  /// BUDGET DIFFERENCE
+  double get budgetDifference {
+    return dailyLimit - todayExpense;
+  }
+
+  /// IS OVER BUDGET
+  bool get isOverBudget {
+    return todayExpense > dailyLimit;
   }
 
   /// FILTERED TRANSACTIONS

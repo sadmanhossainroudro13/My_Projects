@@ -1,6 +1,6 @@
 import 'package:expense_tracker/core/widgets/custom_loading.dart';
 import 'package:expense_tracker/features/transaction/models/transaction_model.dart';
-import 'package:expense_tracker/features/transaction/providers/transaction_provider.dart';
+import 'package:expense_tracker/providers/transaction_provider.dart';
 import 'package:expense_tracker/features/transaction/widgets/build_amount.dart';
 import 'package:expense_tracker/features/transaction/widgets/build_category_chips.dart';
 import 'package:expense_tracker/features/transaction/widgets/build_date.dart';
@@ -111,6 +111,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
       date: fullDate,
     );
 
+    ///adding transaction
     Provider.of<TransactionProvider>(
       context,
       listen: false,
@@ -177,18 +178,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
 
                             const SizedBox(height: 20),
 
-                            ///   CATEGORY CHIPS
-                            BuildCategoryChips(
-                              selectedCategory: selectedCategory,
-                              onCategorySelected: (category) {
-                                setState(() {
-                                  selectedCategory = category;
-                                });
-                              },
-                            ),
-
-                            SizedBox(height: 20),
-
                             ///   EXPENSE / INCOME TOGGLE
                             BuildTypeToggle(
                               isExpense: isExpense,
@@ -201,6 +190,18 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                             ),
 
                             const SizedBox(height: 20),
+
+                            ///   CATEGORY CHIPS
+                            BuildCategoryChips(
+                              selectedCategory: selectedCategory,
+                              onCategorySelected: (category) {
+                                setState(() {
+                                  selectedCategory = category;
+                                });
+                              },
+                            ),
+
+                            SizedBox(height: 20),
 
                             /// DATE & TIME
                             Row(
@@ -263,7 +264,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                               ),
                             ),
 
-                            const SizedBox(height: 100),
+                            const SizedBox(height: 250),
                           ],
                         ),
                       ),

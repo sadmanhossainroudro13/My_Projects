@@ -1,7 +1,9 @@
 import 'package:expense_tracker/core/theme/app_theme.dart';
 import 'package:expense_tracker/features/chart/widgets/chart_item_class.dart';
+import 'package:expense_tracker/providers/currency_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class CategoryCard extends StatelessWidget {
   final ChartItem item;
@@ -10,7 +12,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double percent = item.amount / item.limit;
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     ///  background logic (important)
     Color bgColor = Color(item.color);
@@ -38,7 +40,7 @@ class CategoryCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "\$${item.amount.toStringAsFixed(2)}",
+                "${currencyProvider.selectedCurrency.symbol} ${item.amount.toStringAsFixed(2)}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.socialBg,

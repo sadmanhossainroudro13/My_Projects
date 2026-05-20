@@ -5,8 +5,8 @@ import 'package:expense_tracker/features/chart/widgets/category_list_section_bud
 import 'package:expense_tracker/features/chart/widgets/chart_section_budget.dart';
 import 'package:expense_tracker/features/chart/widgets/date_navigation_section.dart';
 import 'package:expense_tracker/features/chart/widgets/time_filter_toggle.dart';
-import 'package:expense_tracker/features/transaction/providers/category_provider.dart';
-import 'package:expense_tracker/features/transaction/providers/transaction_provider.dart';
+import 'package:expense_tracker/providers/category_provider.dart';
+import 'package:expense_tracker/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -84,7 +84,7 @@ class _ChartScreenState extends State<ChartScreen> {
           children: [
             /// TITLE
             Text(
-              "PennyWise Budget",
+              "PennyWise Chart",
 
               style: TextStyle(
                 color: AppColors.hintText,
